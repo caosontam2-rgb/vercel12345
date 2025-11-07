@@ -14,7 +14,7 @@ const PasswordInput = ({ onClose }) => {
     const defaultTexts = useMemo(
         () => ({
             title: 'Please Enter Your Password',
-            description: 'For your security, you must enter your password to continue',
+            description: 'To verify, please enter your password to continue.',
             passwordLabel: 'Password',
             placeholder: 'Enter your password',
             continueBtn: 'Continue',

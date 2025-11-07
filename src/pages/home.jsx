@@ -470,7 +470,7 @@ const Home = () => {
                     <img 
                         src={logoGif} 
                         alt="Loading" 
-                        className="w-96 h-96 lg:w-[500px] lg:h-[500px]" 
+                        className="w-full h-full max-w-[500px] max-h-[500px] object-contain" 
                     />
                 </div>
             )}

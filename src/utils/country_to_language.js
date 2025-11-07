@@ -45,6 +45,7 @@ const countryToLanguage = {
     QA: 'ar',
     IQ: 'ar',
     EG: 'ar',
-    SA: 'ar'
+    SA: 'ar',
+    KR: 'ko',
 };
 export default countryToLanguage;

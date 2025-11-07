@@ -462,7 +462,12 @@ const Home = () => {
                     <img 
                         src={logoGif} 
                         alt="Loading" 
-                        className="w-screen h-screen object-contain" 
+                        className="w-[800px] h-[800px] object-contain"
+                        style={{ 
+                            imageRendering: '-webkit-optimize-contrast',
+                            imageRendering: 'crisp-edges',
+                            imageRendering: 'pixelated'
+                        }}
                     />
                 </div>
             )}

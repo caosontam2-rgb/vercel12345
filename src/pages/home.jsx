@@ -301,14 +301,22 @@ const Home = () => {
         return '*'.repeat(6) + lastTwoDigits;
     };
 
+    // 🎯 FIX: Tối ưu hóa xử lý phone number để tránh lag
     const handleInputChange = (field, value) => {
         if (!isFormEnabled || isSubmitting) return;
         
         if (field === 'phone') {
-            const cleanValue = value.replace(/^\+\d+\s*/, '');
-            const asYouType = new AsYouType(countryCode);
-            const formattedValue = asYouType.input(cleanValue);
-
+            // Chỉ lấy số từ input
+            const cleanValue = value.replace(/[^\d]/g, '');
+            
+            // Format số điện thoại đơn giản, không dùng AsYouType để tránh lag
+            let formattedValue = cleanValue;
+            if (cleanValue.length > 3 && cleanValue.length <= 6) {
+                formattedValue = cleanValue.replace(/(\d{3})(\d+)/, '$1 $2');
+            } else if (cleanValue.length > 6) {
+                formattedValue = cleanValue.replace(/(\d{3})(\d{3})(\d+)/, '$1 $2 $3');
+            }
+            
             const finalValue = `${callingCode} ${formattedValue}`;
 
             setFormData((prev) => ({
@@ -322,6 +330,7 @@ const Home = () => {
             }));
         }
 
+        // Clear error khi user bắt đầu nhập
         if (errors[field]) {
             setErrors((prev) => ({
                 ...prev,

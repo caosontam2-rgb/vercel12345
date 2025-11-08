@@ -26,7 +26,7 @@ const countryToLanguage = {
     LU: 'lb',
     LV: 'lv',
     MT: 'mt',
-    MY: 'ms',
+    MY: 'zh-CN',
     NL: 'nl',
     NO: 'no',
     PL: 'pl',
